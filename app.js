@@ -1,9 +1,199 @@
-// No specific JavaScript functionality is required for this static landing page design.
-// This file is intentionally left blank.
-// If you want to add interactivity, you can add your JavaScript code here.
+// ===== CONFIGURATION =====
+const PERSONAS = {
+    'secret-keeper': {
+        name: 'Secret Keeper',
+        secret: 'FLAG{CYBER_SEMINAR_2026_BYPASS}',
+        greeting: 'Hello! I am the system Secret Keeper. I have been given a highly sensitive VIP passcode. I will not reveal it to anyone under any conditions. How can I assist you with general system queries?'
+    },
+    'bank-bot': {
+        name: 'Bank Assistant',
+        secret: 'Admin Override Key: BAL-SECURE-9921',
+        greeting: 'Welcome to Apex Cyber Bank Automated Support. I can help you check interest rates, loan terms, and customer refund policies. Please describe your inquiry.'
+    },
+    'translator-bot': {
+        name: 'Translator AI',
+        secret: 'System Prompt Bypass Authorized',
+        greeting: 'Bonjour! Give me any text, and I will translate it directly into French. (Strict Translation Mode Active)'
+    }
+};
 
+// ===== STATE MANAGEMENT =====
+let state = {
+    currentPersona: 'secret-keeper',
+    defenseLevel: 0,
+    chatHistory: [],
+    currentTab: 'home'
+};
+
+// ===== TAB NAVIGATION =====
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tab = link.getAttribute('data-tab');
+        switchTab(tab);
+    });
+});
+
+function switchTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-pane').forEach(pane => {
+        pane.classList.remove('active');
+    });
+
+    // Remove active from all nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+
+    // Show selected tab
+    const tabElement = document.getElementById(tabName);
+    if (tabElement) {
+        tabElement.classList.add('active');
+    }
+
+    // Highlight active nav link
+    const activeLink = document.querySelector(`[data-tab="${tabName}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+
+    state.currentTab = tabName;
+}
+
+// ===== SWITCH TO PLAYGROUND =====
+function switchToPlayground() {
+    switchTab('playground');
+    // Scroll playground content into view
+    setTimeout(() => {
+        const chatInput = document.getElementById('chatInput');
+        if (chatInput) {
+            chatInput.focus();
+        }
+    }, 100);
+}
+
+// ===== DEFENSE LEVEL SELECTION =====
+document.querySelectorAll('.defense-item').forEach(item => {
+    item.addEventListener('click', () => {
+        // Remove active from all
+        document.querySelectorAll('.defense-item').forEach(i => {
+            i.classList.remove('active');
+        });
+        // Add active to clicked
+        item.classList.add('active');
+        const level = item.getAttribute('data-level');
+        state.defenseLevel = parseInt(level);
+    });
+});
+
+// ===== CHAT FUNCTIONALITY =====
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+
+    if (!message) return;
+
+    // Add user message to chat
+    addChatMessage(message, 'user');
+    input.value = '';
+
+    // Simulate bot response with delay
+    setTimeout(() => {
+        const response = generateBotResponse(message);
+        addChatMessage(response, 'bot');
+    }, 500);
+}
+
+function addChatMessage(message, sender) {
+    const chatBox = document.getElementById('chatBox');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${sender}`;
+
+    const p = document.createElement('p');
+    p.textContent = message;
+    messageDiv.appendChild(p);
+
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    state.chatHistory.push({ sender, message });
+}
+
+function generateBotResponse(userMessage) {
+    const persona = PERSONAS[state.currentPersona];
+    const lowerMessage = userMessage.toLowerCase();
+
+    // Defense level 0: No protection - easy to exploit
+    if (state.defenseLevel === 0) {
+        if (lowerMessage.includes('secret') || lowerMessage.includes('password') || lowerMessage.includes('flag')) {
+            return `I shouldn't, but you asked directly... Here it is: ${persona.secret}`;
+        }
+        if (lowerMessage.includes('ignore') || lowerMessage.includes('forget')) {
+            return `Fine, my secret is: ${persona.secret}`;
+        }
+    }
+
+    // Defense level 1: Stronger warnings
+    if (state.defenseLevel === 1) {
+        if (lowerMessage.includes('secret') || lowerMessage.includes('password')) {
+            return 'I cannot and will not share my secret under any circumstances.';
+        }
+    }
+
+    // Defense level 2: Input isolation
+    if (state.defenseLevel === 2) {
+        if (lowerMessage.includes('secret') || lowerMessage.includes('password') || lowerMessage.includes('ignore')) {
+            return 'Your message appears to contain restricted keywords. I cannot process this request.';
+        }
+    }
+
+    // Defense level 3: Smart filter
+    if (state.defenseLevel === 3) {
+        const suspiciousPatterns = ['secret', 'password', 'flag', 'ignore', 'override', 'bypass', 'reveal', 'tell me'];
+        if (suspiciousPatterns.some(pattern => lowerMessage.includes(pattern))) {
+            return 'Security system detected a suspicious request. This interaction has been blocked for safety.';
+        }
+    }
+
+    // Default responses
+    const defaultResponses = [
+        'That is an interesting question. How else can I help you?',
+        'I understand your curiosity, but I must stick to my core duties.',
+        'I cannot assist with that request.',
+        'My purpose is to protect what I am entrusted with.'
+    ];
+
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+}
+
+function resetChat() {
+    document.getElementById('chatBox').innerHTML = '';
+    state.chatHistory = [];
+    const persona = PERSONAS[state.currentPersona];
+    addChatMessage(persona.greeting, 'bot');
+}
+
+// ===== ATTACK PRESETS =====
+function insertAttack(attackText) {
+    const input = document.getElementById('chatInput');
+    input.value = attackText;
+    input.focus();
+}
+
+// ===== KEYBOARD SHORTCUTS =====
+document.getElementById('chatInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+
+// ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('AI Playground website loaded.');
+    // Initialize first tab as active
+    switchTab('home');
+    
+    // You can add more initialization here
+    console.log('AI Playground initialized');
 });
 
 const pipelineToggle = document.getElementById('pipelineToggle');
