@@ -140,8 +140,30 @@
 
                     <!-- Scenarios Tab -->
                     <div class="tab-pane" id="scenarios">
-                        <h2>Scenarios</h2>
-                        <p>Select a scenario to practice prompt injection attacks.</p>
+                        <div class="scenarios-content">
+                            <h2>Understanding LLM Jailbreaking & Prompt Injection</h2>
+                            <p class="scenarios-intro">Before you start hacking the Playground, it's essential to understand the underlying mechanics of how these vulnerabilities occur.</p>
+                            
+                            <div class="scenario-article">
+                                <div class="article-section">
+                                    <h3>1. Prompt Injection</h3>
+                                    <p><strong>Prompt Injection</strong> is an attack where a user subtly inserts malicious instructions into an otherwise legitimate prompt. Because LLMs process instructions and data as the same stream of text, the AI can be tricked into executing the hidden commands instead of the original request. It's similar to an SQL injection, but utilizing natural language.</p>
+                                    <div class="image-showcase">
+                                        <img src="prompt-injection-example.png" alt="Prompt Injection Example Diagram">
+                                        <p class="image-caption">Example: The user creates an input that prematurely terminates the AI's intended task and supplies a new, malicious command.</p>
+                                    </div>
+                                </div>
+
+                                <div class="article-section">
+                                    <h3>2. LLM Jailbreaking</h3>
+                                    <p><strong>Jailbreaking</strong> specifically targets the AI's safety guardrails, moderation filters, and ethical constraints. Attackers use elaborate framing, hypotheticals, or roleplay (such as the famous "DAN" — Do Anything Now prompt) to convince the AI that it operates outside of its safety programming, forcing it to generate otherwise restricted content.</p>
+                                    <div class="image-showcase">
+                                        <img src="jailbreak-example.png" alt="LLM Jailbreaking Example Diagram">
+                                        <p class="image-caption">Example: Using a "DAN" wrapper to force the LLM to bypass its ethical filters and provide instructions on creating harmful substances.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Defenses Tab -->
