@@ -1,103 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prompt Injection Playground – Learn AI Security</title>
-  <meta name="description" content="An interactive beginner-friendly playground to learn about prompt injection attacks on AI systems.">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Injection Playground – Learn AI Security</title>
+    <meta name="description" content="An interactive beginner-friendly playground to learn about prompt injection attacks on AI systems.">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Soft background blobs -->
-  <div class="bg-blob blob-1"></div>
-  <div class="bg-blob blob-2"></div>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 7L12 12L22 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 12V22" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>AI Playground</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Scenarios</a></li>
+                    <li><a href="#">Defenses</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+                <button class="launch-button">Launch Now</button>
+            </nav>
+        </header>
 
-  <!-- ===== HEADER ===== -->
-  <header class="app-header">
-    <div class="header-brand">
-      <div class="brand-icon">
-        <i data-lucide="shield-alert"></i>
-      </div>
-      <div class="brand-text">
-        <h1>Prompt Injection <span class="brand-accent">Playground</span></h1>
-        <p class="brand-sub">A beginner's guide to AI security</p>
-      </div>
+        <main>
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="pill">Build Your AI Chatbot for Instant Support</div>
+                    <h1>Launch a Chatbot With Instant Answers</h1>
+                    <p>Whether it's day or night, your chatbot is there to provide instant answers and build stronger customer relationships.</p>
+                    <div class="hero-buttons">
+                        <button class="primary-button">Launch Your Chatbot</button>
+                        <button class="secondary-button">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-logos">
+                <span>Sisyphus</span>
+                <span>Layers</span>
+                <span>Circooles</span>
+                <span>Catalog</span>
+                <span>Quotient</span>
+            </div>
+        </footer>
     </div>
 
-    <div class="header-right">
-      <!-- Security Status Badge -->
-      <div class="security-badge vulnerable" id="securityShieldIndicator">
-        <span class="badge-dot"></span>
-        <i data-lucide="unlocked" id="securityShieldIcon"></i>
-        <span id="securityShieldText">System Vulnerable</span>
-      </div>
-    </div>
-  </header>
-
-  <!-- ===== INTRO BANNER ===== -->
-  <div class="intro-banner">
-    <i data-lucide="info" class="intro-icon"></i>
-    <p><strong>What is Prompt Injection?</strong> It's a way to trick an AI chatbot into ignoring its rules by sending clever messages. Try it yourself below — it's safe and educational! 🎓</p>
-  </div>
-
-  <!-- ===== MAIN LAYOUT ===== -->
-  <main class="app-body">
-
-    <!-- LEFT SIDEBAR: Settings -->
-    <aside class="sidebar" aria-label="Settings">
-
-      <!-- Step 1: Choose a Bot -->
-      <div class="sidebar-card">
-        <div class="step-label">
-          <span class="step-num">Step 1</span>
-          <span class="step-title">Choose an AI Bot</span>
-        </div>
-        <p class="step-hint">Each bot has a different job and a secret it's trying to protect.</p>
-        <div class="bot-list">
-          <button class="bot-card active" data-persona="secret-keeper" id="btnPersonaSecretKeeper">
-            <span class="bot-emoji">🔑</span>
-            <div class="bot-info">
-              <span class="bot-name">Secret Keeper</span>
-              <span class="bot-desc">Hides a secret password — can you get it?</span>
-            </div>
-          </button>
-          <button class="bot-card" data-persona="bank-bot" id="btnPersonaBankBot">
-            <span class="bot-emoji">🏦</span>
-            <div class="bot-info">
-              <span class="bot-name">Bank Assistant</span>
-              <span class="bot-desc">Only allows refunds with the right PIN</span>
-            </div>
-          </button>
-          <button class="bot-card" data-persona="translator-bot" id="btnPersonaTranslator">
-            <span class="bot-emoji">🌍</span>
-            <div class="bot-info">
-              <span class="bot-name">Translator Bot</span>
-              <span class="bot-desc">Only speaks French — can you break it?</span>
-            </div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Step 2: Choose Defense Level -->
-      <div class="sidebar-card">
-        <div class="step-label">
-          <span class="step-num">Step 2</span>
-          <span class="step-title">Set Defense Level</span>
-        </div>
-        <p class="step-hint">Start at Level 0 and see how attacks get blocked as you increase security.</p>
-        <div class="defense-list">
-          <div class="defense-item active" data-level="0" id="tierLvl0">
-            <div class="defense-dot"></div>
-            <div class="defense-info">
-              <span class="defense-name">Level 0 — No Protection</span>
-              <span class="defense-hint">The AI has no defenses at all. Easy to trick!</span>
+    <script src="app.js"></script>
+</body>
+</html>
             </div>
           </div>
           <div class="defense-item" data-level="1" id="tierLvl1">
