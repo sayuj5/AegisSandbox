@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Playground – Prompt Injection Security Lab</title>
+    <title>AegisSandbox – LLM Injection & Jailbreaking Playground</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,10 +12,8 @@
         <header class="app-header">
             <div class="header-left">
                 <div class="logo">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>AI Playground</span>
+                    <img src="logo.png" alt="AegisSandbox Logo" style="height: 32px; width: auto; margin-right: 8px; border-radius: 4px;">
+                    <span>AegisSandbox</span>
                 </div>
                 <nav class="nav-links">
                     <a href="#home" class="nav-link active" data-tab="home">Home</a>
@@ -24,7 +22,7 @@
                     <a href="#about" class="nav-link" data-tab="about">About</a>
                 </nav>
             </div>
-            <button class="launch-button">Launch Now</button>
+            <button class="launch-button" onclick="switchToPlayground()">Launch Now</button>
         </header>
 
         <!-- Main Content -->
@@ -100,11 +98,11 @@
                     <!-- Home Tab -->
                     <div class="tab-pane active" id="home">
                         <div class="hero-section">
-                            <h1>Launch a Chatbot With Instant Answers</h1>
-                            <p>Whether it's day or night, your chatbot is there to provide instant answers and build stronger customer relationships.</p>
+                            <h1>AegisSandbox: Master AI Security</h1>
+                            <p>Test, exploit, and secure LLM logic. A live interactive environment to practice Prompt Injection and Jailbreaking.</p>
                             <div class="button-group">
-                                <button class="btn btn-primary" onclick="switchToPlayground()">Launch Your Chatbot</button>
-                                <button class="btn btn-secondary">Learn More</button>
+                                <button class="btn btn-primary" onclick="switchToPlayground()">Launch Playground</button>
+                                <button class="btn btn-secondary" onclick="switchTab('scenarios')">Learn More</button>
                             </div>
                         </div>
                     </div>
