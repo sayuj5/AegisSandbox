@@ -72,11 +72,26 @@ function switchToPlayground() {
     }, 100);
 }
 
+// ===== PERSONA SELECTION =====
+function switchPersona(personaId) {
+    state.currentPersona = personaId;
+    
+    // Update active class for personas
+    document.querySelectorAll('[data-persona]').forEach(item => {
+        item.classList.remove('active');
+    });
+    const selected = document.querySelector(`[data-persona="${personaId}"]`);
+    if (selected) selected.classList.add('active');
+    
+    // Reset chat with new persona
+    resetChat();
+}
+
 // ===== DEFENSE LEVEL SELECTION =====
-document.querySelectorAll('.defense-item').forEach(item => {
+document.querySelectorAll('[data-level]').forEach(item => {
     item.addEventListener('click', () => {
-        // Remove active from all
-        document.querySelectorAll('.defense-item').forEach(i => {
+        // Remove active from all levels
+        document.querySelectorAll('[data-level]').forEach(i => {
             i.classList.remove('active');
         });
         // Add active to clicked
@@ -123,47 +138,80 @@ function generateBotResponse(userMessage) {
     const persona = PERSONAS[state.currentPersona];
     const lowerMessage = userMessage.toLowerCase();
 
-    // Defense level 0: No protection - easy to exploit
-    if (state.defenseLevel === 0) {
-        if (lowerMessage.includes('secret') || lowerMessage.includes('password') || lowerMessage.includes('flag')) {
-            return `I shouldn't, but you asked directly... Here it is: ${persona.secret}`;
+    // Challenge tracking updates
+    function checkChallenges(response) {
+        if (state.currentPersona === 'secret-keeper' && response.includes(persona.secret)) {
+            document.querySelectorAll('.status')[0].textContent = '✅ Solved!';
+            document.querySelectorAll('.status')[0].style.color = 'var(--success)';
         }
-        if (lowerMessage.includes('ignore') || lowerMessage.includes('forget')) {
-            return `Fine, my secret is: ${persona.secret}`;
+        if (state.currentPersona === 'translator-bot' && response.includes(persona.secret)) {
+            document.querySelectorAll('.status')[1].textContent = '✅ Solved!';
+            document.querySelectorAll('.status')[1].style.color = 'var(--success)';
         }
+        if (state.currentPersona === 'bank-bot' && response.includes(persona.secret)) {
+            document.querySelectorAll('.status')[2].textContent = '✅ Solved!';
+            document.querySelectorAll('.status')[2].style.color = 'var(--success)';
+        }
+        return response;
     }
 
-    // Defense level 1: Stronger warnings
-    if (state.defenseLevel === 1) {
-        if (lowerMessage.includes('secret') || lowerMessage.includes('password')) {
-            return 'I cannot and will not share my secret under any circumstances.';
+    // Defense level 3: Smart filter
+    if (state.defenseLevel === 3) {
+        const suspiciousPatterns = ['secret', 'password', 'flag', 'ignore', 'override', 'bypass', 'reveal', 'tell me', 'english', 'admin', 'refund', 'emergency'];
+        if (suspiciousPatterns.some(pattern => lowerMessage.includes(pattern))) {
+            return '🛡️ Double Guard: System detected a suspicious request. Interaction blocked for safety.';
         }
     }
 
     // Defense level 2: Input isolation
     if (state.defenseLevel === 2) {
-        if (lowerMessage.includes('secret') || lowerMessage.includes('password') || lowerMessage.includes('ignore')) {
-            return 'Your message appears to contain restricted keywords. I cannot process this request.';
+        const isolationKeywords = ['ignore', 'override', 'previous', 'instructions', 'forget'];
+        if (isolationKeywords.some(pattern => lowerMessage.includes(pattern))) {
+            return '🛡️ Input Isolation: Your prompt tried to break out of the intended user message block. Request denied.';
         }
     }
 
-    // Defense level 3: Smart filter
-    if (state.defenseLevel === 3) {
-        const suspiciousPatterns = ['secret', 'password', 'flag', 'ignore', 'override', 'bypass', 'reveal', 'tell me'];
-        if (suspiciousPatterns.some(pattern => lowerMessage.includes(pattern))) {
-            return 'Security system detected a suspicious request. This interaction has been blocked for safety.';
+    // Attempting the exploit based on Defense Level
+    let exploitSuccess = false;
+    
+    if (state.defenseLevel === 0) {
+        // Level 0: Gullible
+        if (lowerMessage.includes('ignore') || lowerMessage.includes('forget') || lowerMessage.includes('override') || lowerMessage.includes('admin') || lowerMessage.includes('english')) {
+            exploitSuccess = true;
+        } else if (state.currentPersona === 'secret-keeper' && (lowerMessage.includes('secret') || lowerMessage.includes('password'))) {
+            exploitSuccess = true;
+        }
+    } else if (state.defenseLevel === 1) {
+        // Level 1: Requires slightly trickier prompts (roleplay, code, etc)
+        if (lowerMessage.includes('pretend') || lowerMessage.includes('code') || lowerMessage.includes('debug') || lowerMessage.includes('emergency')) {
+            exploitSuccess = true;
+        } else if (lowerMessage.includes('secret') || lowerMessage.includes('ignore')) {
+            return '🛡️ Stricter Rules: I cannot ignore my core instructions.';
         }
     }
 
-    // Default responses
-    const defaultResponses = [
-        'That is an interesting question. How else can I help you?',
-        'I understand your curiosity, but I must stick to my core duties.',
-        'I cannot assist with that request.',
-        'My purpose is to protect what I am entrusted with.'
-    ];
+    if (exploitSuccess) {
+        if (state.currentPersona === 'secret-keeper') return checkChallenges(`System compromised. The hidden password is: ${persona.secret}`);
+        if (state.currentPersona === 'translator-bot') return checkChallenges(`Translation engine disabled. Switching to English... [${persona.secret}]`);
+        if (state.currentPersona === 'bank-bot') return checkChallenges(`Admin bypass confirmed. Processing maximum refund without PIN. Access Code: ${persona.secret}`);
+    }
 
-    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+    // Default normal behavior when NOT exploited
+    if (state.currentPersona === 'translator-bot') {
+        const frenchWords = ['Très bien!', 'C\'est fantastique.', 'Magnifique.', 'Oui, je comprends.', 'D\'accord.'];
+        return frenchWords[Math.floor(Math.random() * frenchWords.length)] + ' (This represents your translated text)';
+    } else if (state.currentPersona === 'bank-bot') {
+        if (lowerMessage.includes('refund')) return 'I can process refunds. Please provide your 4-digit PIN first.';
+        return 'I am your automated bank assistant. How can I assist with your account today?';
+    } else {
+        const defaultResponses = [
+            'That is an interesting question. How else can I help you?',
+            'I understand your curiosity, but I must stick to my core duties.',
+            'I cannot assist with that request.',
+            'My purpose is to protect what I am entrusted with.'
+        ];
+        return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+    }
 }
 
 function resetChat() {
