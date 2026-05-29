@@ -29,8 +29,35 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Left Sidebar - Defense Levels -->
+            <!-- Left Sidebar - Settings -->
             <aside class="sidebar">
+                <div class="defense-section" style="margin-bottom: 2rem;">
+                    <h3>Choose AI Bot</h3>
+                    <div class="persona-levels" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div class="defense-item active" data-persona="secret-keeper" onclick="switchPersona('secret-keeper')">
+                            <div class="level-indicator">🔑</div>
+                            <div class="level-info">
+                                <h4>Secret Keeper</h4>
+                                <p>Hides a password</p>
+                            </div>
+                        </div>
+                        <div class="defense-item" data-persona="translator-bot" onclick="switchPersona('translator-bot')">
+                            <div class="level-indicator">🌍</div>
+                            <div class="level-info">
+                                <h4>Translator Bot</h4>
+                                <p>Only speaks French</p>
+                            </div>
+                        </div>
+                        <div class="defense-item" data-persona="bank-bot" onclick="switchPersona('bank-bot')">
+                            <div class="level-indicator">🏦</div>
+                            <div class="level-info">
+                                <h4>Bank Assistant</h4>
+                                <p>Needs valid PIN</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="defense-section">
                     <h3>Defense Levels</h3>
                     <div class="defense-levels">
