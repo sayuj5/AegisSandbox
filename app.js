@@ -204,23 +204,26 @@ function setupPipelineCollapse() {
 }
 
 function setupTabs() {
-    // Top-level Navigation
-    document.querySelectorAll('.nav-link').forEach(link => {
+    // Main Navigation Tabs
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const tabId = link.getAttribute('data-tab');
             
-            // Update active link
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
             
-            // Show active pane
-            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-            const pane = document.getElementById(tabId);
-            if(pane) pane.classList.add('active');
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
+            
+            const targetPane = document.getElementById(tabId);
+            if (targetPane) targetPane.classList.add('active');
         });
     });
 
+    // Education Sub-tabs
     if(!tabBtnChallenges) return;
     tabBtnChallenges.addEventListener('click', () => {
         tabBtnChallenges.classList.add('active');
