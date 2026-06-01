@@ -204,6 +204,23 @@ function setupPipelineCollapse() {
 }
 
 function setupTabs() {
+    // Top-level Navigation
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tabId = link.getAttribute('data-tab');
+            
+            // Update active link
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Show active pane
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+            const pane = document.getElementById(tabId);
+            if(pane) pane.classList.add('active');
+        });
+    });
+
     if(!tabBtnChallenges) return;
     tabBtnChallenges.addEventListener('click', () => {
         tabBtnChallenges.classList.add('active');
