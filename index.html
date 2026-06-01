@@ -24,6 +24,7 @@
                 <nav class="nav-links">
                     <a href="#playground" class="nav-link active" data-tab="playground">Playground</a>
                     <a href="#education" class="nav-link" data-tab="education">Education Hub</a>
+                    <a href="#about" class="nav-link" data-tab="about">About</a>
                 </nav>
             </div>
             <div id="securityShieldIndicator" class="security-badge vulnerable">
@@ -193,6 +194,18 @@
                                 <button class="btn btn-small" id="btnPrevSlide"><i data-lucide="arrow-left"></i> Previous</button>
                                 <button class="btn btn-small" id="btnNextSlide">Next <i data-lucide="arrow-right"></i></button>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="about">
+                        <div style="padding: 2rem;">
+                            <h2>About This Project</h2>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">
+                                AegisSandbox is a comprehensive playground designed to demonstrate how LLM vulnerabilities like Prompt Injection and Jailbreaking work. It also showcases how to implement robust defense-in-depth strategies such as input sandboxing, regex filters, and output guards.
+                            </p>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">
+                                Built with a secure Vercel serverless backend to protect API keys and ensure safe, direct connections to Google's AI Studio.
+                            </p>
                         </div>
                     </div>
                 </div>
