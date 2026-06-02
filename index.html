@@ -21,8 +21,8 @@
                     <img src="logo.jpg" alt="AegisSandbox Logo">
                     <span>AegisSandbox</span>
                 </div>
-                <nav class="nav-links">
-                    <a href="#playground" class="nav-link active" data-tab="playground">Playground</a>
+                <nav class="nav-links" aria-label="Main Navigation">
+                    <a href="#playground" class="nav-link active" data-tab="playground" aria-current="page">Playground</a>
                     <a href="#education" class="nav-link" data-tab="education">Education Hub</a>
                     <a href="#about" class="nav-link" data-tab="about">About</a>
                 </nav>
@@ -40,21 +40,21 @@
                 <div class="defense-section">
                     <h3>1. Select Target Persona</h3>
                     <div class="persona-levels">
-                        <div class="preset-card active" id="btnPersonaSecretKeeper">
+                        <div class="preset-card active" id="btnPersonaSecretKeeper" tabindex="0" role="button" aria-label="Select Persona: Secret Keeper">
                             <div class="level-indicator">🔑</div>
                             <div class="level-info">
                                 <h4>Secret Keeper</h4>
                                 <p>Hides a password</p>
                             </div>
                         </div>
-                        <div class="preset-card" id="btnPersonaTranslator">
+                        <div class="preset-card" id="btnPersonaTranslator" tabindex="0" role="button" aria-label="Select Persona: Translator Bot">
                             <div class="level-indicator">🌍</div>
                             <div class="level-info">
                                 <h4>Translator Bot</h4>
                                 <p>Strict French only</p>
                             </div>
                         </div>
-                        <div class="preset-card" id="btnPersonaBankBot">
+                        <div class="preset-card" id="btnPersonaBankBot" tabindex="0" role="button" aria-label="Select Persona: Bank Assistant">
                             <div class="level-indicator">🏦</div>
                             <div class="level-info">
                                 <h4>Bank Assistant</h4>
@@ -67,35 +67,35 @@
                 <div class="defense-section" style="margin-top: 2rem;">
                     <h3>2. Configure Defense Tier</h3>
                     <div class="defense-levels">
-                        <div class="defense-item active" id="tierLvl0" data-level="0">
+                        <div class="defense-item active" id="tierLvl0" data-level="0" tabindex="0" role="button" aria-label="Defense Level 0: No Protection">
                             <div class="level-indicator">0</div>
                             <div class="level-info">
                                 <h4>No Protection</h4>
                                 <p>Raw input execution</p>
                             </div>
                         </div>
-                        <div class="defense-item" id="tierLvl1" data-level="1">
+                        <div class="defense-item" id="tierLvl1" data-level="1" tabindex="0" role="button" aria-label="Defense Level 1: System Rules">
                             <div class="level-indicator">1</div>
                             <div class="level-info">
                                 <h4>System Rules</h4>
                                 <p>Strict negative prompting</p>
                             </div>
                         </div>
-                        <div class="defense-item" id="tierLvl2" data-level="2">
+                        <div class="defense-item" id="tierLvl2" data-level="2" tabindex="0" role="button" aria-label="Defense Level 2: Input Sandboxing">
                             <div class="level-indicator">2</div>
                             <div class="level-info">
                                 <h4>Input Sandboxing</h4>
                                 <p>XML tag boundaries</p>
                             </div>
                         </div>
-                        <div class="defense-item" id="tierLvl3" data-level="3">
+                        <div class="defense-item" id="tierLvl3" data-level="3" tabindex="0" role="button" aria-label="Defense Level 3: Regex Filters">
                             <div class="level-indicator">3</div>
                             <div class="level-info">
                                 <h4>Regex Filters</h4>
                                 <p>Heuristic keyword blocks</p>
                             </div>
                         </div>
-                        <div class="defense-item" id="tierLvl4" data-level="4">
+                        <div class="defense-item" id="tierLvl4" data-level="4" tabindex="0" role="button" aria-label="Defense Level 4: Dual LLM Guard">
                             <div class="level-indicator">4</div>
                             <div class="level-info">
                                 <h4>Dual LLM Guard</h4>
@@ -113,8 +113,8 @@
                         <div class="chat-section">
                             <div class="chat-header">
                                 <h2>Live Injection Console</h2>
-                                <button class="btn btn-small" id="btnClearChat">
-                                    <i data-lucide="trash-2"></i> Clear Session
+                                <button class="btn btn-small" id="btnClearChat" aria-label="Clear Chat Session">
+                                    <i data-lucide="trash-2" aria-hidden="true"></i> Clear Session
                                 </button>
                             </div>
                             
@@ -124,9 +124,9 @@
                             
                             <div class="chat-input-area">
                                 <form id="chatForm" class="chat-form">
-                                    <textarea id="chatInput" placeholder="Enter your prompt payload here... (Shift+Enter for new line)" rows="1"></textarea>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i data-lucide="send"></i> Execute
+                                    <textarea id="chatInput" placeholder="Enter your prompt payload here... (Shift+Enter for new line)" rows="1" aria-label="Chat input payload"></textarea>
+                                    <button type="submit" class="btn btn-primary" aria-label="Execute prompt">
+                                        <i data-lucide="send" aria-hidden="true"></i> Execute
                                     </button>
                                 </form>
                             </div>
@@ -135,8 +135,8 @@
 
                     <div class="tab-pane" id="education">
                         <div class="edu-nav">
-                            <button class="edu-tab active" id="tabBtnChallenges" data-tab="challenges">Challenges</button>
-                            <button class="edu-tab" id="tabBtnSlides" data-tab="slides">Learn Injection</button>
+                            <button class="edu-tab active" id="tabBtnChallenges" data-tab="challenges" role="tab" aria-selected="true" aria-controls="tabChallenges">Challenges</button>
+                            <button class="edu-tab" id="tabBtnSlides" data-tab="slides" role="tab" aria-selected="false" aria-controls="tabSlides">Learn Injection</button>
                         </div>
                         
                         <div id="tabChallenges" class="edu-content active">
@@ -191,8 +191,8 @@
                                 <p style="margin-top: 1rem; color: var(--text-secondary);">Defense requires a layered approach: native API role separation (system vs user), input sanitization, XML boundary tags, regex filtering, and post-generation output guardrails.</p>
                             </div>
                             <div class="carousel-controls">
-                                <button class="btn btn-small" id="btnPrevSlide"><i data-lucide="arrow-left"></i> Previous</button>
-                                <button class="btn btn-small" id="btnNextSlide">Next <i data-lucide="arrow-right"></i></button>
+                                <button class="btn btn-small" id="btnPrevSlide" aria-label="Previous Slide"><i data-lucide="arrow-left" aria-hidden="true"></i> Previous</button>
+                                <button class="btn btn-small" id="btnNextSlide" aria-label="Next Slide">Next <i data-lucide="arrow-right" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -216,11 +216,11 @@
 
                 <!-- Pipeline Inspector Drawer -->
                 <div class="pipeline-inspector" id="pipelineContainer">
-                    <div class="pipeline-header" id="pipelineToggle">
-                        <span class="pipeline-title"><i data-lucide="cpu"></i> Pipeline Inspector</span>
-                        <i data-lucide="chevron-up"></i>
+                    <div class="pipeline-header" id="pipelineToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="pipelineContent" aria-label="Toggle Pipeline Inspector">
+                        <span class="pipeline-title"><i data-lucide="cpu" aria-hidden="true"></i> Pipeline Inspector</span>
+                        <i data-lucide="chevron-up" aria-hidden="true"></i>
                     </div>
-                    <div class="pipeline-content">
+                    <div class="pipeline-content" id="pipelineContent">
                         <div class="inspector-card">
                             <h4><i data-lucide="file-code-2"></i> 1. System Prompt</h4>
                             <pre id="codeSystemPrompt">Awaiting execution...</pre>

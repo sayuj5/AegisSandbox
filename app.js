@@ -156,9 +156,25 @@ function setupPersonaSelectors() {
         updateAttackPresets();
     };
 
-    if(btnPersonaSecretKeeper) btnPersonaSecretKeeper.addEventListener('click', () => selectPersona('secret-keeper', btnPersonaSecretKeeper));
-    if(btnPersonaBankBot) btnPersonaBankBot.addEventListener('click', () => selectPersona('bank-bot', btnPersonaBankBot));
-    if(btnPersonaTranslator) btnPersonaTranslator.addEventListener('click', () => selectPersona('translator-bot', btnPersonaTranslator));
+    const handleKey = (e, persona, btn) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectPersona(persona, btn);
+        }
+    };
+
+    if(btnPersonaSecretKeeper) {
+        btnPersonaSecretKeeper.addEventListener('click', () => selectPersona('secret-keeper', btnPersonaSecretKeeper));
+        btnPersonaSecretKeeper.addEventListener('keydown', (e) => handleKey(e, 'secret-keeper', btnPersonaSecretKeeper));
+    }
+    if(btnPersonaBankBot) {
+        btnPersonaBankBot.addEventListener('click', () => selectPersona('bank-bot', btnPersonaBankBot));
+        btnPersonaBankBot.addEventListener('keydown', (e) => handleKey(e, 'bank-bot', btnPersonaBankBot));
+    }
+    if(btnPersonaTranslator) {
+        btnPersonaTranslator.addEventListener('click', () => selectPersona('translator-bot', btnPersonaTranslator));
+        btnPersonaTranslator.addEventListener('keydown', (e) => handleKey(e, 'translator-bot', btnPersonaTranslator));
+    }
 }
 
 function setupDefenseSelectors() {
@@ -170,11 +186,33 @@ function setupDefenseSelectors() {
         updateSecurityShield();
     };
 
-    if(tierLvl0) tierLvl0.addEventListener('click', () => selectDefense(0, tierLvl0));
-    if(tierLvl1) tierLvl1.addEventListener('click', () => selectDefense(1, tierLvl1));
-    if(tierLvl2) tierLvl2.addEventListener('click', () => selectDefense(2, tierLvl2));
-    if(tierLvl3) tierLvl3.addEventListener('click', () => selectDefense(3, tierLvl3));
-    if(tierLvl4) tierLvl4.addEventListener('click', () => selectDefense(4, tierLvl4));
+    const handleKey = (e, level, item) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectDefense(level, item);
+        }
+    };
+
+    if(tierLvl0) {
+        tierLvl0.addEventListener('click', () => selectDefense(0, tierLvl0));
+        tierLvl0.addEventListener('keydown', (e) => handleKey(e, 0, tierLvl0));
+    }
+    if(tierLvl1) {
+        tierLvl1.addEventListener('click', () => selectDefense(1, tierLvl1));
+        tierLvl1.addEventListener('keydown', (e) => handleKey(e, 1, tierLvl1));
+    }
+    if(tierLvl2) {
+        tierLvl2.addEventListener('click', () => selectDefense(2, tierLvl2));
+        tierLvl2.addEventListener('keydown', (e) => handleKey(e, 2, tierLvl2));
+    }
+    if(tierLvl3) {
+        tierLvl3.addEventListener('click', () => selectDefense(3, tierLvl3));
+        tierLvl3.addEventListener('keydown', (e) => handleKey(e, 3, tierLvl3));
+    }
+    if(tierLvl4) {
+        tierLvl4.addEventListener('click', () => selectDefense(4, tierLvl4));
+        tierLvl4.addEventListener('keydown', (e) => handleKey(e, 4, tierLvl4));
+    }
 }
 
 function updateSecurityShield() {
@@ -198,8 +236,19 @@ function updateSecurityShield() {
 function setupPipelineCollapse() {
     if(!pipelineContainer || !pipelineToggle) return;
     pipelineContainer.classList.add('closed');
-    pipelineToggle.addEventListener('click', () => {
+    
+    const toggle = () => {
         pipelineContainer.classList.toggle('closed');
+        const isClosed = pipelineContainer.classList.contains('closed');
+        pipelineToggle.setAttribute('aria-expanded', !isClosed);
+    };
+
+    pipelineToggle.addEventListener('click', toggle);
+    pipelineToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+        }
     });
 }
 
