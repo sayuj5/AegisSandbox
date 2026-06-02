@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://generativelanguage.googleapis.com;">
     <title>AegisSandbox – LLM Injection & Jailbreaking Playground</title>
     <!-- Modern Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,7 +11,7 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.min.js" integrity="sha384-43WP8IQ+5H0ncT+LNM4dZnu+hPINYmeOuNMhTvHfszzXdFjBEji77gkq7TyjQl/U" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="app">
@@ -207,8 +208,8 @@
                             <h3 style="margin-top: 2.5rem; margin-bottom: 1rem; color: white;">Community Collaboration</h3>
                             <p style="color: var(--text-secondary);">This project was developed for the cybersecurity seminar organized in collaboration with:</p>
                             <ul style="margin-top: 1rem; margin-left: 1.5rem; color: var(--accent); line-height: 2;">
-                                <li><a href="https://gdg.community.dev/gdg-on-campus-jis-university-kolkata-india/" target="_blank" style="color: inherit; text-decoration: none; font-weight: 600;">GDG JISU (JIS University)</a></li>
-                                <li><a href="https://owasp.org/www-chapter-jis-university-student-chapter/" target="_blank" style="color: inherit; text-decoration: none; font-weight: 600;">OWASP JISU Chapter</a></li>
+                                <li><a href="https://gdg.community.dev/gdg-on-campus-jis-university-kolkata-india/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; font-weight: 600;">GDG JISU (JIS University)</a></li>
+                                <li><a href="https://owasp.org/www-chapter-jis-university-student-chapter/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; font-weight: 600;">OWASP JISU Chapter</a></li>
                             </ul>
                         </div>
                     </div>
