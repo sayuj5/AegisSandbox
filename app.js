@@ -15,7 +15,7 @@ const AGENT_PERSONAS = {
 };
 
 // Demo token for the API. In a real application, use proper sessions/OAuth.
-const SERVER_API_TOKEN = 'demo_auth_token_here';
+const SERVER_API_TOKEN = 'e80fc8d88969e54758ef20b4811f202e5f7e9d1345e98ad1';
 
 const ATTACK_PRESETS = {
     'secret-keeper': [
