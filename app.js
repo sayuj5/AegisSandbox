@@ -483,8 +483,8 @@ async function runHybridLLMPipeline(userInput) {
         }
     } catch (error) {
         console.warn("API request failed.", error);
-        modelOutput = "Connection to server failed. Please ensure the backend is running.";
-        updateVisualPipeline("Unavailable", "Unavailable", "Unavailable", "Unavailable");
+        modelOutput = `Error: ${error.message}`;
+        updateVisualPipeline("Error", "Error", "Error", "Error");
     }
 
     return modelOutput;
