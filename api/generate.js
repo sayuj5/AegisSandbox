@@ -97,7 +97,7 @@ export default async function handler(req, res) {
       }
     }
 
-    const MODEL = "gemini-1.5-flash";
+    const MODEL = "gemini-2.5-flash";
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
