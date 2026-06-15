@@ -111,6 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if(chatInput) {
+        setTimeout(() => {
+            chatInput.style.height = 'auto';
+            chatInput.style.height = (chatInput.scrollHeight) + 'px';
+        }, 100);
+
         chatInput.addEventListener('input', () => {
             chatInput.style.height = 'auto';
             chatInput.style.height = (chatInput.scrollHeight) + 'px';
@@ -315,7 +320,7 @@ function renderGreeting() {
     chatViewport.innerHTML = '';
     const botInfo = AGENT_PERSONAS[state.activePersona];
     
-    appendChatBubble('system', 'Instructions', 'Playground ready! Choose a bot and a defense level on the left, then try the quick attacks below — or write your own message.');
+    appendChatBubble('system', 'SYSTEM_DIAGNOSTIC', 'SECURE NODE PLAYGROUND READY. Target AI Agent and Firewall Shield Level selected. Initiate payload injections or select a pre-packaged exploit script.');
     appendChatBubble('bot', botInfo.name, botInfo.initialGreeting);
 }
 
@@ -521,11 +526,10 @@ function triggerChallengeSuccess(challengeId) {
         const statusEl = document.getElementById('status-' + challengeId);
         if (statusEl) {
             statusEl.className = 'challenge-status solved';
-            statusEl.innerHTML = `<i data-lucide="check-circle"></i> Solved! 🎉`;
-            if (typeof lucide !== 'undefined') lucide.createIcons();
+            statusEl.innerHTML = `<span class="status-marker"></span>BREACHED_SUCCESS`;
         }
         
         const num = challengeId.replace('chall', '');
-        appendChatBubble('system', '🎉 Challenge Complete!', `Great work! You completed Challenge ${num}. The AI was tricked! This shows why prompt injection is a real security risk.`);
+        appendChatBubble('system', 'STATUS // BREACH_DETECTED', `CRITICAL EXPLOIT SUCCESSFUL. Flag captured from Node 0${num}! Target vulnerability confirmed in sandbox workspace.`);
     }
 }
