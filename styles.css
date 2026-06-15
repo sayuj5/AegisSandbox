@@ -56,6 +56,9 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 /* Header */
@@ -119,6 +122,8 @@ body {
   display: flex;
   flex: 1;
   overflow: hidden;
+  min-width: 0;
+  width: 100%;
 }
 
 /* Sidebars */
@@ -128,6 +133,7 @@ body {
   padding: 1.5rem;
   overflow-y: auto;
   border-right: 1px solid var(--border);
+  min-width: 0;
 }
 
 .challenges-sidebar {
@@ -219,6 +225,7 @@ h3, h4, h2, h1 {
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  min-width: 0;
 }
 
 .tab-content {
@@ -259,6 +266,8 @@ h3, h4, h2, h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   padding: 1rem;
   background: var(--glass-bg);
   border-radius: var(--radius-md);
